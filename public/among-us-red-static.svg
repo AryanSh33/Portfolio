@@ -1,0 +1,10 @@
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Body -->
+  <circle cx="20" cy="25" r="10" fill="#dc3c3c"/>
+  <!-- Head -->
+  <circle cx="20" cy="10" r="7" fill="#dc3c3c"/>
+  <!-- Left eye -->
+  <rect x="17" y="8" width="2" height="2" fill="#1e1e1e"/>
+  <!-- Right eye -->
+  <rect x="23" y="8" width="2" height="2" fill="#1e1e1e"/>
+</svg>

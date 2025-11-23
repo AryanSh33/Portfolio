@@ -210,53 +210,124 @@ function InteractiveBackground() {
   )
 }
 
-function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovering, setIsHovering] = useState(false)
+function CrewMateFollower() {
+  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 })
+  const [crewPosition, setCrewPosition] = useState({ x: -100, y: -100 })
+  const [isMoving, setIsMoving] = useState(false)
+  const animationFrameRef = useRef<number | null>(null)
+  const lastUpdateTime = useRef(Date.now())
+  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const lastDirectionRef = useRef<"left" | "right" | "up" | "down">("right")
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
 
-    const handleMouseOver = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).tagName === "BUTTON" || (e.target as HTMLElement).tagName === "A") {
-        setIsHovering(true)
-      } else {
-        setIsHovering(false)
-      }
-    }
-
     window.addEventListener("mousemove", updateMousePosition)
-    window.addEventListener("mouseover", handleMouseOver)
-
-    return () => {
-      window.removeEventListener("mousemove", updateMousePosition)
-      window.removeEventListener("mouseover", handleMouseOver)
-    }
+    return () => window.removeEventListener("mousemove", updateMousePosition)
   }, [])
 
+  useEffect(() => {
+    const animate = () => {
+      const now = Date.now()
+      const deltaTime = (now - lastUpdateTime.current) / 1000
+      lastUpdateTime.current = now
+
+      const dx = mousePosition.x - crewPosition.x
+      const dy = mousePosition.y - crewPosition.y
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      // Threshold to stop moving
+      if (distance < 5) {
+        setIsMoving(false)
+        // Resume after 3 seconds
+        if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current)
+        pauseTimerRef.current = setTimeout(() => {
+          setIsMoving(true)
+        }, 3000)
+        animationFrameRef.current = requestAnimationFrame(animate)
+        return
+      }
+
+      setIsMoving(true)
+
+      // Determine primary direction
+      const absDx = Math.abs(dx)
+      const absDy = Math.abs(dy)
+
+      if (absDx > absDy) {
+        lastDirectionRef.current = dx > 0 ? "right" : "left"
+      } else {
+        lastDirectionRef.current = dy > 0 ? "down" : "up"
+      }
+
+      // Move towards cursor with smooth but intentional speed
+      const speed = 120 // pixels per second (reduced from cursor speed)
+      const moveDistance = Math.min(speed * deltaTime, distance)
+      const ratio = moveDistance / distance
+
+      setCrewPosition({
+        x: crewPosition.x + dx * ratio,
+        y: crewPosition.y + dy * ratio,
+      })
+
+      animationFrameRef.current = requestAnimationFrame(animate)
+    }
+
+    animationFrameRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+      if (pauseTimerRef.current) {
+        clearTimeout(pauseTimerRef.current)
+      }
+    }
+  }, [mousePosition, crewPosition])
+
   return (
-    <>
+    <motion.div
+      className="fixed top-0 left-0 pointer-events-none z-50 will-change-transform"
+      style={{
+        x: crewPosition.x - 20,
+        y: crewPosition.y - 20,
+      }}
+    >
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-white rounded-full mix-blend-difference pointer-events-none z-50"
         animate={{
-          x: mousePosition.x - 8,
-          y: mousePosition.y - 8,
-          scale: isHovering ? 2.5 : 1,
+          scaleX: (lastDirectionRef.current === "right" ? -1 : 1),
+          y: isMoving ? [0, -4, 0, -4, 0] : 0,
         }}
-        transition={{ type: "spring", stiffness: 500, damping: 28 }}
-      />
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-white rounded-full mix-blend-difference pointer-events-none z-50"
-        animate={{
-          x: mousePosition.x - 16,
-          y: mousePosition.y - 16,
-          scale: isHovering ? 1.5 : 1,
+        transition={{
+          y: {
+            duration: 0.4,
+            repeat: isMoving ? Number.POSITIVE_INFINITY : 0,
+            ease: "linear",
+          },
+          scaleX: {
+            duration: 0.1,
+          },
         }}
-        transition={{ type: "spring", stiffness: 250, damping: 20 }}
-      />
-    </>
+        style={{
+          width: 40,
+          height: 40,
+          imageRendering: "pixelated",
+        }}
+      >
+        <img
+          src={isMoving ? "/among-us-red.gif" : "/among us red.png"}
+          alt="Among Us Crew Member"
+          className="w-full h-full object-contain"
+          style={{
+            imageRendering: "pixelated",
+            filter: "drop-shadow(2px 2px 0 rgba(0,0,0,0.3))",
+            transform: !isMoving ? "scaleX(-1)" : "scaleX(1)",
+          }}
+        />
+      </motion.div>
+    </motion.div>
   )
 }
 
@@ -308,7 +379,7 @@ function ProjectDetailModal({ project, onClose }: { project: any; onClose: () =>
             </div>
 
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{project.title}</h2>
-            <p className="text-xl text-gray-300 mb-6">{project.description}</p>
+            <p className="text-xl text-gray-400 mb-6">{project.description}</p>
           </div>
 
           <div className="mb-8">
@@ -540,7 +611,7 @@ export default function Portfolio() {
   return (
     <div className="relative min-h-screen bg-[#030014] text-white overflow-x-hidden selection:bg-purple-500/30">
       <InteractiveBackground />
-      <CustomCursor />
+      <CrewMateFollower />
 
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 origin-left z-50"
