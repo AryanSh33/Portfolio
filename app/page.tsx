@@ -618,9 +618,9 @@ export default function Portfolio() {
         "Integration with multiple threat intelligence feeds",
       ],
       metrics: [
-        { label: "Detection Speed", value: "<100ms" },
-        { label: "Accuracy", value: "94%" },
-        { label: "Threats/Day", value: "10K+" },
+        { label: "Accuracy", value: "88%" },
+        { label: "F1 Score", value: "0.84" },
+        { label: "Recall", value: "0.95" },
       ],
     },
     {
