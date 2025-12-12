@@ -864,7 +864,7 @@ export default function Portfolio() {
               </motion.div>
 
               <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                750+{" "}
+                800+{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
                   LeetCode
                 </span>{" "}
@@ -938,14 +938,21 @@ export default function Portfolio() {
               </p>
 
               <div className="flex gap-6">
-                {[Github, Linkedin, Mail].map((Icon, index) => (
+                {[
+                  { Icon: Github, href: "https://github.com/AryanSh33", label: "GitHub" },
+                  { Icon: Linkedin, href: "https://www.linkedin.com/in/aryan-00994a299", label: "LinkedIn" },
+                  { Icon: Mail, href: "mailto:aryanmsharma11@gmail.com", label: "Email" },
+                ].map((item, index) => (
                   <Magnetic key={index}>
                     <motion.a
-                      href="#"
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ y: -5, color: "#a855f7" }}
                       className="p-4 rounded-full bg-white/5 border border-white/10 text-white transition-colors block"
+                      title={item.label}
                     >
-                      <Icon className="w-6 h-6" />
+                      <item.Icon className="w-6 h-6" />
                     </motion.a>
                   </Magnetic>
                 ))}
