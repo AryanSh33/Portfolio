@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useEffect, useRef, useState } from "react"
+import emailjs from "emailjs-com"
 import {
   motion,
   useScroll,
@@ -51,7 +52,7 @@ function InteractiveBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const { scrollY } = useScroll()
-  const opacity = useTransform(scrollY, [0, window.innerHeight || 800], [1, 0])
+  const opacity = useTransform(scrollY, [0, typeof window !== "undefined" ? window.innerHeight : 800], [1, 0])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -370,11 +371,11 @@ function ProjectDetailModal({ project, onClose }: { project: any; onClose: () =>
 
         <div className="p-8 md:p-12">
           <div className="mb-8">
-            <div className="h-64 md:h-96 w-full overflow-hidden rounded-xl bg-black/50 mb-6">
+            <div className={`h-64 md:h-96 w-full overflow-hidden rounded-xl ${project.bgColor} mb-6`}>
               <img
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
 
@@ -422,7 +423,7 @@ function ProjectDetailModal({ project, onClose }: { project: any; onClose: () =>
           <div className="flex gap-4">
             <Magnetic>
               <button
-                onClick={() => window.open("https://github.com/aryansharma", "_blank")}
+                onClick={() => window.open(project.githubLink || "https://github.com/AryanSh33", "_blank")}
                 className="flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-black font-medium hover:bg-purple-400 transition-colors"
               >
                 <Github className="w-5 h-5" />
@@ -487,11 +488,11 @@ function ProjectCard({ project, index, onClick }: { project: any; index: number;
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         <div className="relative z-10 flex flex-col h-full">
-          <div className="mb-4 h-48 w-full overflow-hidden rounded-lg bg-black/50 perspective-500">
+          <div className={`mb-4 h-48 w-full overflow-hidden rounded-lg ${project.bgColor} perspective-500`}>
             <img
               src={project.image || "/placeholder.svg"}
               alt={project.title}
-              className="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-1 transition-all duration-500"
+              className="w-full h-full object-contain group-hover:scale-105 group-hover:rotate-1 transition-all duration-500"
             />
           </div>
 
@@ -543,9 +544,61 @@ export default function Portfolio() {
   })
 
   const [selectedProject, setSelectedProject] = useState<any>(null)
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" })
+  const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [formMessage, setFormMessage] = useState("")
+
+  // Initialize EmailJS
+  useEffect(() => {
+    if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY)
+    }
+  }, [])
 
   const handleProjectClick = (project: any) => {
     setSelectedProject(project)
+  }
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    // Validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setFormStatus("error")
+      setFormMessage("Please fill in all fields")
+      setTimeout(() => setFormStatus("idle"), 3000)
+      return
+    }
+
+    setFormStatus("loading")
+
+    try {
+      // Send email using EmailJS
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_email: process.env.NEXT_PUBLIC_EMAILJS_RECIPIENT_EMAIL || "",
+        }
+      )
+
+      setFormStatus("success")
+      setFormMessage("Message sent successfully! I'll get back to you soon.")
+      setFormData({ name: "", email: "", message: "" })
+      setTimeout(() => setFormStatus("idle"), 3000)
+    } catch (error) {
+      setFormStatus("error")
+      setFormMessage("Failed to send message. Please try again or contact me directly.")
+      setTimeout(() => setFormStatus("idle"), 3000)
+    }
   }
 
   const projects = [
@@ -554,7 +607,9 @@ export default function Portfolio() {
       description:
         "Engineered an AI cybersecurity framework using Quantized Graph Neural Networks (QGNNs) for real-time anomaly detection with dynamic attack graph construction.",
       tags: ["PyTorch", "Hugging Face", "Kafka", "FastAPI", "PyGeometric", "PennyLane"],
-      image: "/cybersecurity-ai-network-graph-dashboard.jpg",
+      image: "/QGNN attack graph.png",
+      bgColor: "bg-white",
+      githubLink: "https://github.com/AryanSh33/IDS-GNN-models",
       features: [
         "Real-time anomaly detection using Quantized Graph Neural Networks (QGNNs)",
         "Dynamic attack graph construction for threat visualization",
@@ -573,7 +628,9 @@ export default function Portfolio() {
       description:
         "Built a FastAPI-based system enabling natural language querying of research papers with BERT-powered semantic search and Gemini summarization.",
       tags: ["FastAPI", "Gemini", "Semantic Scholar API", "BERT", "Python"],
-      image: "/research-papers-ai-assistant-dashboard.jpg",
+      image: "/RSLM.png",
+      bgColor: "bg-blue-900/30",
+      githubLink: "https://github.com/AryanSh33/ResearchLM",
       features: [
         "Natural language querying of academic research papers",
         "BERT-based semantic keyphrase extraction for accurate search",
@@ -592,7 +649,9 @@ export default function Portfolio() {
       description:
         "Developed a Swin-UNet hybrid model for brain tumor segmentation achieving 97% accuracy with Dice score of 0.94 and HD95 of 1.",
       tags: ["PyTorch", "OpenCV", "Grad-CAM", "Nibabel", "FastAPI"],
-      image: "/brain-scan-medical-ai-segmentation.jpg",
+      image: "/BTS gradcam.png",
+      bgColor: "bg-yellow-900/30",
+      githubLink: "https://github.com/AryanSh33/Brain-Tumor-Segmentation",
       features: [
         "Swin-UNet hybrid architecture combining CNN and Transformer strengths",
         "Advanced preprocessing pipeline for MRI scans",
@@ -893,14 +952,17 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <motion.form initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-6">
+            <motion.form onSubmit={handleFormSubmit} initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-6">
               <div className="space-y-2 group">
                 <label className="text-sm font-medium text-gray-400 group-focus-within:text-purple-500 transition-colors">
                   Name
                 </label>
                 <input
                   type="text"
-                  className="w-full px-6 py-4 rounded-lg bg-white/5 border border-white/10 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-all text-white"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  className="w-full px-6 py-4 rounded-lg bg-white/5 border border-white/10 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-all text-white placeholder-gray-600"
                   placeholder="John Doe"
                 />
               </div>
@@ -910,7 +972,10 @@ export default function Portfolio() {
                 </label>
                 <input
                   type="email"
-                  className="w-full px-6 py-4 rounded-lg bg-white/5 border border-white/10 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-all text-white"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  className="w-full px-6 py-4 rounded-lg bg-white/5 border border-white/10 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-all text-white placeholder-gray-600"
                   placeholder="john@example.com"
                 />
               </div>
@@ -919,18 +984,40 @@ export default function Portfolio() {
                   Message
                 </label>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleFormChange}
                   rows={4}
-                  className="w-full px-6 py-4 rounded-lg bg-white/5 border border-white/10 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-all text-white"
+                  className="w-full px-6 py-4 rounded-lg bg-white/5 border border-white/10 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-all text-white placeholder-gray-600"
                   placeholder="Tell me about your project..."
                 />
               </div>
+
+              {formStatus !== "idle" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`p-4 rounded-lg text-center font-medium ${
+                    formStatus === "success"
+                      ? "bg-green-500/20 text-green-300 border border-green-500/30"
+                      : formStatus === "error"
+                        ? "bg-red-500/20 text-red-300 border border-red-500/30"
+                        : "bg-blue-500/20 text-blue-300 border border-blue-500/30"
+                  }`}
+                >
+                  {formMessage}
+                </motion.div>
+              )}
+
               <Magnetic>
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
+                  type="submit"
+                  disabled={formStatus === "loading"}
+                  whileHover={{ scale: formStatus === "loading" ? 1 : 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg hover:opacity-90 transition-opacity"
+                  className="w-full py-4 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {formStatus === "loading" ? "Sending..." : "Send Message"}
                 </motion.button>
               </Magnetic>
             </motion.form>
