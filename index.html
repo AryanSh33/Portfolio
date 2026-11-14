@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aryan Sharma · ML, AI &amp; Data Engineer</title>
+  <meta name="description" content="Aryan Sharma — ML engineer, AI engineer, data scientist and data engineer. Python, SQL, PySpark, LLMs and deep learning.">
+  <meta name="theme-color" content="#fc3a52">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Yellowtail&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Motion preference: the visitor's choice on this site wins, otherwise the system setting
+    (function () {
+      var pref = null;
+      try { pref = localStorage.getItem("motion"); } catch (e) {}
+      var reduce = pref ? pref === "off" : window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.documentElement.classList.toggle("reduce-motion", reduce);
+    })();
+  </script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fc3a52'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='700' font-size='36' fill='%23fff'%3EA.%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Custom cursor (hidden on touch and reduced motion) -->
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"><span class="cursor__label"></span></div></div>
+
+  <header class="nav" id="top">
+    <a class="nav__logo magnetic" href="#top" aria-label="Aryan Sharma, back to top">A<span>.</span></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#code">Code</a></li>
+        <li><a href="#about">About</a></li>
+        <li><button class="motion-toggle" type="button" id="motion-toggle" aria-pressed="true"><span class="motion-toggle__track" aria-hidden="true"><span class="motion-toggle__thumb"></span></span>Motion</button></li>
+        <li><a class="nav__cta magnetic" href="#contact">Say hello</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__copy">
+        <a class="hero__name" href="#about">Aryan Sharma</a>
+        <p class="hero__role">Currently at <a class="hero__company" href="https://www.infosys.com/" target="_blank" rel="noopener">Infosys<span class="sr-only"> (opens in new tab)</span></a>, data engineering</p>
+        <h1 id="hero-title" class="hero__title">
+          <span class="line">I turn data</span>
+          <span class="line">into <span class="rotator" id="rotator">
+            <span class="sr-only">models, AI products, insights and pipelines</span>
+            <span class="rotator__word script is-on" aria-hidden="true" data-role="ml">models.</span>
+            <span class="rotator__word script" aria-hidden="true" data-role="ai">AI products.</span>
+            <span class="rotator__word script" aria-hidden="true" data-role="ds">insights.</span>
+            <span class="rotator__word script" aria-hidden="true" data-role="de">pipelines.</span>
+          </span></span>
+        </h1>
+        <ul class="roles" aria-label="Roles">
+          <li class="role is-on" data-role="ml"><span class="role__dot" aria-hidden="true"></span>ML Engineer</li>
+          <li class="role" data-role="ai"><span class="role__dot" aria-hidden="true"></span>AI Engineer</li>
+          <li class="role" data-role="ds"><span class="role__dot" aria-hidden="true"></span>Data Scientist</li>
+          <li class="role" data-role="de"><span class="role__dot" aria-hidden="true"></span>Data Engineer</li>
+        </ul>
+        <p class="hero__intro">
+          Hi, I'm Aryan. I train deep learning models, build LLM and RAG systems, find the story in data and engineer the pipelines that feed it all.
+          I <a href="#work">Build</a>, <a href="https://github.com/AryanSh33" target="_blank" rel="noopener">Code</a> and
+          <a href="https://leetcode.com/u/aryanmsharma/" target="_blank" rel="noopener">Solve.</a>
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary magnetic" href="#work">See my work</a>
+          <a class="btn btn--ghost magnetic" href="mailto:aryanmsharma11@gmail.com">Email me</a>
+        </div>
+      </div>
+
+      <!-- Floating chips: parallax with the cursor -->
+      <div class="hero__field" aria-hidden="true">
+        <canvas class="hero__gl" id="hero-gl"></canvas>
+        <div class="chip chip--red" data-depth="0.6" style="--x:8%;--y:6%"><b>2,200+</b><span>problems solved</span></div>
+        <div class="chip" data-depth="1.2" style="--x:58%;--y:2%"><b>99.33%</b><span>deepfake accuracy</span></div>
+        <div class="chip chip--cream" data-depth="0.9" style="--x:30%;--y:34%"><b>0.94</b><span>Dice score, MRI</span></div>
+        <div class="chip chip--dark" data-depth="1.5" style="--x:66%;--y:44%"><b>1,200+</b><span>on LeetCode</span></div>
+        <div class="chip" data-depth="0.7" style="--x:4%;--y:62%"><b>300K+</b><span>images trained</span></div>
+        <div class="chip chip--cream" data-depth="1.1" style="--x:44%;--y:74%"><b>&lt;25s</b><span>Rubik's average</span></div>
+        <div class="blob" data-depth="0.3"></div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Python</span><span>Java</span><span>SQL</span><span>PySpark</span><span>FastAPI</span><span>PostgreSQL</span><span>MongoDB</span><span>Neo4j</span><span>RAG</span><span>LLMs</span><span>PyTorch</span><span>TensorFlow</span><span>Docker</span><span>OpenCV</span>
+        <span>Python</span><span>Java</span><span>SQL</span><span>PySpark</span><span>FastAPI</span><span>PostgreSQL</span><span>MongoDB</span><span>Neo4j</span><span>RAG</span><span>LLMs</span><span>PyTorch</span><span>TensorFlow</span><span>Docker</span><span>OpenCV</span>
+      </div>
+    </div>
+
+    <!-- WORK -->
+    <section class="section" id="work" aria-labelledby="work-title">
+      <header class="section__head reveal">
+        <h2 id="work-title" class="display">I pour my <span class="script">heart</span> into every model.</h2>
+        <p class="lede">A small selection of systems I've designed, trained and shipped, from LLM data pipelines to medical imaging.</p>
+      </header>
+
+      <div class="projects">
+        <article class="card tilt reveal" data-cursor="Open">
+          <div class="card__media card__media--art art-llm" aria-hidden="true" data-preview="llm">
+            <span>SQL</span><span>Mongo</span><span>Neo4j</span>
+          </div>
+          <div class="card__body">
+            <p class="card__tag">LLM · RAG · Data engineering</p>
+            <h3 class="card__title">LLM-powered data extraction &amp; transformation</h3>
+            <ul class="card__points">
+              <li>RAG workflow that retrieves from documents and answers natural-language queries</li>
+              <li>LLMs turn requests into queries across SQL, MongoDB and Neo4j</li>
+              <li>Combines retrieval with relational, document and graph access into structured output</li>
+            </ul>
+            <p class="card__meta">Work project · code not public</p>
+          </div>
+        </article>
+
+        <article class="card tilt reveal">
+          <a class="card__link" href="https://github.com/AryanSh33/IDS-GNN-models" target="_blank" rel="noopener" data-cursor="Code">
+            <span class="sr-only">LLM and QGNN cyber threat platform, view code on GitHub (opens in new tab)</span>
+          </a>
+          <div class="card__media" data-preview="qgnn"><img src="assets/qgnn.png" alt="Attack graph produced by the QGNN threat model" loading="lazy"></div>
+          <div class="card__body">
+            <p class="card__tag">QGNN · LLM · Cybersecurity</p>
+            <h3 class="card__title">LLM &amp; QGNN cyber threat intelligence</h3>
+            <ul class="card__points">
+              <li>Quantized graph neural networks for real-time anomaly detection</li>
+              <li>Dynamic attack graphs that capture evolving threat patterns</li>
+              <li>Prompt-tuned LLMs explain threats and suggest mitigations</li>
+            </ul>
+            <p class="card__meta">IDS-GNN-models <span aria-hidden="true">↗</span></p>
+          </div>
+        </article>
+
+        <article class="card tilt reveal">
+          <a class="card__link" href="https://github.com/AryanSh33/ViT-ResNet50-DeepFake-Detection" target="_blank" rel="noopener" data-cursor="Code">
+            <span class="sr-only">ViT-CNN deepfake detection, view code on GitHub (opens in new tab)</span>
+          </a>
+          <div class="card__media card__media--art art-deepfake" aria-hidden="true" data-preview="deepfake">
+            <b>99.33%</b><small>accuracy · 0.9997 ROC-AUC</small>
+          </div>
+          <div class="card__body">
+            <p class="card__tag">ViT · ResNet50 · Streamlit</p>
+            <h3 class="card__title">ViT-CNN deepfake detection</h3>
+            <ul class="card__points">
+              <li>Hybrid Vision Transformer + ResNet50 with cross-attention fusion</li>
+              <li>Trained on 300K+ images</li>
+              <li>Real-time Streamlit app with MTCNN face extraction</li>
+            </ul>
+            <p class="card__meta">ViT-ResNet50-DeepFake-Detection <span aria-hidden="true">↗</span></p>
+          </div>
+        </article>
+
+        <article class="card tilt reveal">
+          <a class="card__link" href="https://github.com/AryanSh33/Brain-Tumor-Segmentation" target="_blank" rel="noopener" data-cursor="Code">
+            <span class="sr-only">Brain tumor segmentation, view code on GitHub (opens in new tab)</span>
+          </a>
+          <div class="card__media" data-preview="brain"><img src="assets/brain-tumor.png" alt="Grad-CAM heatmap over a brain MRI scan" loading="lazy"></div>
+          <div class="card__body">
+            <p class="card__tag">Swin-UNet · Grad-CAM · MRI</p>
+            <h3 class="card__title">Brain tumor segmentation</h3>
+            <ul class="card__points">
+              <li>Hybrid CNN-Transformer (Swin-UNet) for MRI scans</li>
+              <li>97% accuracy, Dice 0.94, HD95 of 1</li>
+              <li>Grad-CAM explainability for clinical interpretation</li>
+            </ul>
+            <p class="card__meta">Brain-Tumor-Segmentation <span aria-hidden="true">↗</span></p>
+          </div>
+        </article>
+
+        <article class="card tilt reveal">
+          <a class="card__link" href="https://github.com/AryanSh33/ResearchLM" target="_blank" rel="noopener" data-cursor="Code">
+            <span class="sr-only">ResearchLM, view code on GitHub (opens in new tab)</span>
+          </a>
+          <div class="card__media" data-preview="research"><img src="assets/researchlm.png" alt="ResearchLM search interface" loading="lazy"></div>
+          <div class="card__body">
+            <p class="card__tag">FastAPI · BERT · LLM</p>
+            <h3 class="card__title">ResearchLM, a research assistant</h3>
+            <ul class="card__points">
+              <li>Natural-language search over academic papers</li>
+              <li>BERT-based semantic keyphrase extraction</li>
+              <li>LLM summaries with context-aware insights</li>
+            </ul>
+            <p class="card__meta">ResearchLM <span aria-hidden="true">↗</span></p>
+          </div>
+        </article>
+      </div>
+
+      <p class="more reveal"><a class="btn btn--ghost magnetic" href="#repos">Browse all repositories</a></p>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section section--cream" id="experience" aria-labelledby="exp-title">
+      <header class="section__head reveal">
+        <h2 id="exp-title" class="display">Where I've <span class="script">worked</span></h2>
+      </header>
+      <ol class="timeline">
+        <li class="job tilt tilt--soft reveal">
+          <div class="job__when"><time datetime="2026-06">June 2026</time> – Present</div>
+          <div>
+            <h3 class="job__title">Specialist Programmer, Data Engineering</h3>
+            <p class="job__org">Infosys</p>
+            <ul>
+              <li>Build data extraction, transformation and processing workflows in Python, SQL and PySpark</li>
+              <li>Query, aggregate and retrieve data across SQL, MongoDB and Neo4j</li>
+              <li>Unix/Linux scripting and LLM workflows for automated query generation</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job tilt tilt--soft reveal">
+          <div class="job__when"><time datetime="2025-09">Sept 2025</time> – <time datetime="2026-06">June 2026</time></div>
+          <div>
+            <h3 class="job__title">AI Development &amp; Automation</h3>
+            <p class="job__org">Lucrente</p>
+            <ul>
+              <li>Shipped AI features with LLMs, prompt engineering and information processing</li>
+              <li>Automated repetitive tasks, data handling and business processes</li>
+              <li>Connected AI services to backend APIs and databases; tuned for reliability</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- CODE: GitHub + LeetCode -->
+    <section class="section" id="code" aria-labelledby="code-title">
+      <header class="section__head reveal">
+        <h2 id="code-title" class="display">Hack things. <span class="script">Solve</span> problems.</h2>
+        <p class="lede">Live from GitHub and LeetCode.</p>
+      </header>
+
+      <div class="panel tilt tilt--soft reveal" id="gh-panel" aria-labelledby="gh-title">
+        <div class="panel__head">
+          <h3 id="gh-title">GitHub contributions</h3>
+          <a class="panel__link" href="https://github.com/AryanSh33" target="_blank" rel="noopener">@AryanSh33 <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>
+        </div>
+        <p class="panel__summary" id="gh-summary" aria-live="polite">Loading contributions…</p>
+        <div class="heat-wrap"><div class="heat skeleton" id="gh-heat" role="img" aria-label="Loading GitHub contribution chart"></div></div>
+        <div class="legend" aria-hidden="true">Less <i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i> More</div>
+      </div>
+
+      <div class="panel tilt tilt--soft reveal" id="lc-panel" aria-labelledby="lc-title">
+        <div class="panel__head">
+          <h3 id="lc-title">LeetCode</h3>
+          <a class="panel__link" href="https://leetcode.com/u/aryanmsharma/" target="_blank" rel="noopener">@aryanmsharma <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>
+        </div>
+        <p class="panel__summary" id="lc-status" aria-live="polite">Loading LeetCode stats…</p>
+        <div class="lc">
+          <div class="ring" id="lc-ring" role="img" aria-label="Problems solved">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring__track" cx="60" cy="60" r="52"></circle>
+              <circle class="ring__seg ring__seg--easy" cx="60" cy="60" r="52"></circle>
+              <circle class="ring__seg ring__seg--med" cx="60" cy="60" r="52"></circle>
+              <circle class="ring__seg ring__seg--hard" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <div class="ring__label"><b id="lc-total">1,200+</b><span>solved</span></div>
+          </div>
+          <dl class="bars">
+            <div class="bar bar--easy"><dt>Easy</dt><dd><span class="bar__num" id="lc-easy">–</span><span class="bar__track"><span class="bar__fill" id="lc-easy-bar"></span></span></dd></div>
+            <div class="bar bar--med"><dt>Medium</dt><dd><span class="bar__num" id="lc-med">–</span><span class="bar__track"><span class="bar__fill" id="lc-med-bar"></span></span></dd></div>
+            <div class="bar bar--hard"><dt>Hard</dt><dd><span class="bar__num" id="lc-hard">–</span><span class="bar__track"><span class="bar__fill" id="lc-hard-bar"></span></span></dd></div>
+            <div class="lc__extra"><dt>Active days, last year</dt><dd id="lc-days">–</dd></div>
+          </dl>
+        </div>
+        <div class="cal-head">
+          <h4 class="panel__sub" id="lc-cal-title">Submissions</h4>
+          <div class="tabs" role="tablist" aria-labelledby="lc-cal-title" id="lc-tabs">
+            <button class="tab" type="button" role="tab" id="lc-tab-last" aria-selected="true" aria-controls="lc-cal-panel" data-year="last">Past 12 months</button>
+          </div>
+        </div>
+        <div id="lc-cal-panel" role="tabpanel" aria-labelledby="lc-tab-last">
+          <p class="cal-stats" id="lc-cal-stats" aria-live="polite"></p>
+          <div class="skyline" id="lc-skyline" hidden>
+            <div class="skyline__stage" id="lc-skyline-stage" role="img" aria-label="3D skyline of LeetCode submissions"></div>
+            <p class="skyline__hint" aria-hidden="true"><span class="hint-mouse">Drag to rotate · hover a tower for the day</span><span class="hint-touch">Swipe sideways to rotate · tap a tower for the day</span></p>
+          </div>
+          <div class="heat-wrap"><div class="heat heat--lc skeleton" id="lc-heat" role="img" aria-label="Loading LeetCode submission chart"></div></div>
+        </div>
+      </div>
+
+      <div class="panel vault-panel reveal" id="vault" aria-labelledby="vault-title">
+        <div class="panel__head">
+          <h3 id="vault-title">Badge vault</h3>
+          <a class="panel__link" href="https://leetcode.com/u/aryanmsharma/" target="_blank" rel="noopener">All on LeetCode <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>
+        </div>
+        <p class="panel__summary" id="vault-status" aria-live="polite">Loading badges…</p>
+        <div class="vault">
+          <div class="vault__stage" id="vault-stage" role="img" aria-label="3D vault holding LeetCode badges">
+            <p class="vault__hint" aria-hidden="true"><span class="hint-mouse">Drag to spin · click a badge</span><span class="hint-touch">Swipe to spin · tap a badge</span></p>
+          </div>
+          <aside class="vault__side" aria-label="Badge details">
+            <figure class="badge-detail" id="badge-detail">
+              <div class="badge-detail__img"><img id="badge-img" alt="" hidden></div>
+              <figcaption aria-live="polite"><b id="badge-name">Pick a badge</b><span id="badge-date">Tap one in the vault or in the list</span></figcaption>
+            </figure>
+            <ul class="badge-list" id="badge-list" aria-label="All badges"></ul>
+          </aside>
+        </div>
+      </div>
+
+      <div class="panel reveal" id="repos" aria-labelledby="repos-title">
+        <div class="panel__head">
+          <h3 id="repos-title">Latest repositories</h3>
+          <a class="panel__link" href="https://github.com/AryanSh33?tab=repositories" target="_blank" rel="noopener">View all <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>
+        </div>
+        <p class="panel__summary" id="repo-status" aria-live="polite">Loading repositories…</p>
+        <ul class="repos" id="repo-list"></ul>
+      </div>
+    </section>
+
+    <!-- ABOUT: skills, education, achievements -->
+    <section class="section section--cream" id="about" aria-labelledby="about-title">
+      <header class="section__head reveal">
+        <h2 id="about-title" class="display">Be <span class="script">curious.</span></h2>
+        <p class="lede">CS (AI &amp; ML) graduate with a strong DSA foundation and a habit of building things end to end: backend, data and models.</p>
+      </header>
+
+      <div class="about">
+        <div class="tile tilt tilt--soft reveal">
+          <h3>Skills</h3>
+          <dl class="skills">
+            <div><dt>Languages</dt><dd>Java, Python, C, JavaScript, SQL</dd></div>
+            <div><dt>Backend &amp; tools</dt><dd>FastAPI, Flask, Git, Docker, Unix/Linux</dd></div>
+            <div><dt>Databases</dt><dd>PostgreSQL, MongoDB, Neo4j, SQLite</dd></div>
+            <div><dt>Data &amp; AI/ML</dt><dd>PySpark, Pandas, RAG, LLMs, TensorFlow, PyTorch, Scikit-learn, OpenCV</dd></div>
+          </dl>
+        </div>
+
+        <div class="tile tilt tilt--soft reveal">
+          <h3>Education</h3>
+          <p class="edu__deg">B.Tech, Computer Science &amp; Engineering (AI &amp; ML)</p>
+          <p>Shri Ramdeobaba College of Engineering and Management</p>
+          <p class="edu__cgpa"><b>8.28</b> / 10 CGPA</p>
+        </div>
+
+        <div class="tile tile--red tilt tilt--soft reveal">
+          <h3>Off the keyboard</h3>
+          <ul class="achv">
+            <li>Co-holder of a registered design patent: <em>A Cap for Stick Shaped Products Packaging</em> (IPO, 2025)</li>
+            <li>International karate medalist</li>
+            <li>DSO football for school, inter-branch tournaments for college</li>
+            <li>Speedcuber, sub-25-second average</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <p class="contact__kicker reveal">Got a role, a project or a hard problem?</p>
+      <h2 id="contact-title" class="contact__title reveal">Let's <span class="script">talk.</span></h2>
+      <div class="contact__row reveal">
+        <a class="contact__mail magnetic" href="mailto:aryanmsharma11@gmail.com" data-cursor="Write">aryanmsharma11@gmail.com</a>
+        <button class="btn btn--light" type="button" id="copy-email" aria-describedby="copy-status">Copy email</button>
+        <span id="copy-status" class="copy-status" role="status"></span>
+      </div>
+      <ul class="socials reveal">
+        <li><a class="magnetic" href="https://www.linkedin.com/in/aryan-00994a299" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in new tab)</span></a></li>
+        <li><a class="magnetic" href="https://github.com/AryanSh33" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in new tab)</span></a></li>
+        <li><a class="magnetic" href="https://leetcode.com/u/aryanmsharma/" target="_blank" rel="noopener">LeetCode<span class="sr-only"> (opens in new tab)</span></a></li>
+      </ul>
+      <p class="footer">© <span id="year">2026</span> Aryan Sharma</p>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+  <script src="preview.js" defer></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="three-scenes.js"></script>
+</body>
+</html>
